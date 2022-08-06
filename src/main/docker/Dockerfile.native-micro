@@ -10,11 +10,11 @@
 #
 # Then, build the image with:
 #
-# docker build -f src/main/docker/Dockerfile.native-micro -t quarkus/quarkus-google-pubusb-demo .
+# docker build -f src/main/docker/Dockerfile.native-micro -t quarkus/quarkus-google-pubsub-demo .
 #
 # Then run the container using:
 #
-# docker run -i --rm -p 8080:8080 quarkus/quarkus-google-pubusb-demo
+# docker run -i --rm -p 8080:8080 quarkus/quarkus-google-pubsub-demo
 #
 ###
 FROM quay.io/quarkus/quarkus-micro-image:1.0
