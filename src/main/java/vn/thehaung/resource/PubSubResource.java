@@ -68,7 +68,7 @@ public class PubSubResource {
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    public void pubsub() throws IOException, InterruptedException {
+    public String pubsub() throws IOException, InterruptedException {
         // Init a publisher to the topic
         Publisher publisher = Publisher.newBuilder(topicName)
                 .setCredentialsProvider(credentialsProvider)
@@ -90,6 +90,7 @@ public class PubSubResource {
             publisher.shutdown();
             publisher.awaitTermination(1, TimeUnit.MINUTES);
         }
+        return "";
     }
 
     private ProjectSubscriptionName initSubscription() throws IOException {
@@ -104,7 +105,7 @@ public class PubSubResource {
             Optional<Subscription> existing = StreamSupport.stream(subscriptions.spliterator(), false)
                     .filter(sub -> sub.getName().equals(subscriptionName.toString()))
                     .findFirst();
-            if (!existing.isPresent()) {
+            if (existing.isEmpty()) {
                 subscriptionAdminClient.createSubscription(subscriptionName, topicName, PushConfig.getDefaultInstance(), 0);
             }
         }
